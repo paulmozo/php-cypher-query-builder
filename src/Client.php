@@ -1,5 +1,9 @@
 <?php namespace QueryBuilder;
 
+use QueryBuilder\Clauses\MatchClause;
+use QueryBuilder\Clauses\WhereClause;
+use QueryBuilder\Clauses\ReturnClause;
+
 /**
 *  Query Builder Client
 *
@@ -7,20 +11,53 @@
 */
 class Client{
 
-   /**  @var string $m_SampleProperty define here what this variable is for, do this for every instance variable */
-   private $m_SampleProperty = '';
- 
-  /**
-  * Sample method 
-  *
-  * Always create a corresponding docblock for each method, describing what it is for,
-  * this helps the phpdocumentator to properly generator the documentation
-  *
-  * @param string $param1 A string containing the parameter, do this for each parameter to the function, make sure to make it descriptive
-  *
-  * @return string
-  */
-   public function method1($param1){
-			return "Hello World";
-   }
+	private $matchClause;
+
+	private $whereClause;
+
+	private $returnClause;
+
+	private $clauses = [];
+
+	public function __construct(){
+		$this->reset();
+
+		$this->clauses = [
+			$this->matchClause,
+			$this->whereClause,
+			$this->returnClause
+		];
+	}
+
+	public function match($label, $variable = ''){
+		$this->matchClause->match($label, $variable);
+		return $this;
+	}
+
+	public function where($variable, $attribute, $operator, $value, $or = false){
+		$this->whereClause->where($variable, $attribute, $operator, $value, $or = false);
+		return $this;
+	}
+
+	public function return($variable, $attribute = ''){
+		$this->returnClause->return($variable, $attribute);
+		return $this;
+	}
+
+	public function __toString(){
+		$clauseStrings = [];
+
+		foreach ($this->clauses as $clause){
+			if (!empty($clause->getClause())){
+				$clauseStrings[] = $clause->getClause();	
+			}
+		}
+		return implode(' ', $clauseStrings);
+	}
+
+	public function reset(){
+		$this->matchClause = new MatchClause;
+		$this->whereClause = new WhereClause;
+		$this->returnClause = new ReturnClause;
+	}
 }

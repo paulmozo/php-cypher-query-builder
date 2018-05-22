@@ -3,7 +3,7 @@ namespace QueryBuilder\Clauses;
 
 abstract class Clause
 {
-	protected $clause;
+	protected $clause = '';
 
 	protected $clauseName;
 
