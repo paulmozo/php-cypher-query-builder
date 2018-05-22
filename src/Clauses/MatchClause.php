@@ -2,14 +2,13 @@
 namespace QueryBuilder\Clauses;
 use QueryBuilder\Exceptions\MatchEndingWithRelationshipException;
 
-class MatchClause extends Clause
-{
+class MatchClause extends Clause{
+
 	protected $clauseName = 'MATCH';
 
 	protected $relationShipMatch = false;
 
-    public function match($label, $variable = '')
-    {
+    public function match($label, $variable = ''){
         if (!$this->relationShipMatch){
         	$this->nodeMatch($label, $variable);
         }
