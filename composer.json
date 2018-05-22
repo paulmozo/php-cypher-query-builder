@@ -1,0 +1,24 @@
+{
+    "name": "paulmozo/php-cypher-query-builder",
+    "description": "A PHP library for generating Cypher queries to be used with Graph databases such as Neo4J",
+    "keywords": ["query", "neo4j", "cypher"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul Mozo",
+            "email": "paulmozo@gmail.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+		"php": ">=7.0"
+    },
+	"require-dev": {
+		"phpunit/phpunit": ">=6"
+    },
+	"autoload": {
+        "psr-4": {
+            "QueryBuilder\\": "src/"
+        }
+    }
+}
