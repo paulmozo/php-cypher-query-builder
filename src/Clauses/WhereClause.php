@@ -5,34 +5,31 @@ class WhereClause extends Clause
 {
 	protected $clauseName = 'WHERE';
 
-    public function where($variable, $attribute, $operator, $value, $or = false)
-    {
-    	$append = !empty($this->getClause());
+    	public function where($variable, $attribute, $operator, $value, $or = false){
+    		$append = !empty($this->getClause());
 
-    	if ($append){
-    		$this->appendAndOr($or);
+    		if ($append){
+    			$this->appendAndOr($or);
+    		}
+
+    		switch ($operator) {
+    			case "=":
+        			$this->equals($variable, $attribute, $value);
+        			break;
+        		default:
+        			throw new UnsupportedOperator("$operator is not supported as an operator");
+        	}
     	}
 
-    	switch ($operator) {
-    		case "=":
-        		$this->equals($variable, $attribute, $value);
-        		break;
-        	default:
-        		throw new UnsupportedOperator("$operator is not supported as an operator");
-        }
-    }
+    	private function equals($variable, $attribute, $value){
+    		$this->addToClause("$variable.$attribute = \"$value\"");
+    	}
 
-    private function equals($variable, $attribute, $value)
-    {
-    	$this->addToClause("$variable.$attribute = \"$value\"");
-    }
-
-    /**
-     * Appends an "AND" or an "OR"
-     */
-    private function appendAndOr($appendOr)
-    {
-    	$stringToAppend = ($appendOr ? "OR" : "AND");
-    	$this->addToClause(" $stringToAppend ");
-    }
+    	/**
+     	 * Appends an "AND" or an "OR"
+     	 */
+    	private function appendAndOr($appendOr){
+    		$stringToAppend = ($appendOr ? "OR" : "AND");
+    		$this->addToClause(" $stringToAppend ");
+    	}
 }
