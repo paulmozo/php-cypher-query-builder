@@ -6,13 +6,13 @@ use PHPUnit\Framework\TestCase;
 class ClientTest extends TestCase{  
 
   public function testMatchSingleNode(){
-	$client = new QueryBuilder\Client();
+	$client = new Moozla\QueryBuilder\Client();
 	$client->match('Person');
 	$this->assertEquals('MATCH (:Person)', (string)$client);
   }
 
   public function testComplexQuery(){
-    $client = new QueryBuilder\Client();
+    $client = new Moozla\QueryBuilder\Client();
 
     $client
       ->match('Person', 'person')

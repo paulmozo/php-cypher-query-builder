@@ -1,6 +1,6 @@
 <?php
-namespace QueryBuilder\Clauses;
-use QueryBuilder\Exceptions\MatchEndingWithRelationshipException;
+namespace Moozla\QueryBuilder\Clauses;
+use Moozla\QueryBuilder\Exceptions\MatchEndingWithRelationshipException;
 
 class MatchClause extends Clause{
 

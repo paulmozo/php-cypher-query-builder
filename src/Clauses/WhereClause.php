@@ -1,5 +1,5 @@
 <?php
-namespace QueryBuilder\Clauses;
+namespace Moozla\QueryBuilder\Clauses;
 
 class WhereClause extends Clause
 {

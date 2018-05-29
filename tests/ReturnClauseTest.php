@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use QueryBuilder\Clauses\ReturnClause;
+use Moozla\QueryBuilder\Clauses\ReturnClause;
 
 class ReturnClauseTest extends TestCase{  
 
