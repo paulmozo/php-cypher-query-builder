@@ -18,7 +18,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "QueryBuilder\\": "src/"
+            "Moozla\\QueryBuilder\\": "src/"
         }
     }
 }

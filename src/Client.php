@@ -1,8 +1,8 @@
-<?php namespace QueryBuilder;
+<?php namespace Moozla\QueryBuilder;
 
-use QueryBuilder\Clauses\MatchClause;
-use QueryBuilder\Clauses\WhereClause;
-use QueryBuilder\Clauses\ReturnClause;
+use Moozla\QueryBuilder\Clauses\MatchClause;
+use Moozla\QueryBuilder\Clauses\WhereClause;
+use Moozla\QueryBuilder\Clauses\ReturnClause;
 
 /**
 *  Query Builder Client

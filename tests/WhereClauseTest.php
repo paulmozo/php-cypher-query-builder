@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use QueryBuilder\Clauses\WhereClause;
+use Moozla\QueryBuilder\Clauses\WhereClause;
 
 class WhereClauseTest extends TestCase{  
 

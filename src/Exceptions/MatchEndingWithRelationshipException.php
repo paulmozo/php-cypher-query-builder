@@ -1,5 +1,5 @@
 <?php
-namespace QueryBuilder\Exceptions;
+namespace Moozla\QueryBuilder\Exceptions;
 
 class MatchEndingWithRelationshipException extends \Exception{
 

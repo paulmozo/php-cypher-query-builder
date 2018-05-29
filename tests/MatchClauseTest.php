@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use QueryBuilder\Clauses\MatchClause;
-use QueryBuilder\Exceptions\MatchEndingWithRelationshipException;
+use Moozla\QueryBuilder\Clauses\MatchClause;
+use Moozla\QueryBuilder\Exceptions\MatchEndingWithRelationshipException;
 
 class MatchClauseTest extends TestCase{  
 
