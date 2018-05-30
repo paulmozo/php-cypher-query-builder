@@ -62,9 +62,7 @@ class Client{
 			$this->returnClause
 		];
 
-		$this->createAppendMethod($this->matchClause);
-		$this->createAppendMethod($this->whereClause);
-		$this->createAppendMethod($this->returnClause);
+		$this->createCustomAppendMethods();
 
 	}
 
@@ -72,28 +70,26 @@ class Client{
 	 * Creates a custom append method for each clause at run time
 	 */
 	private function createCustomAppendMethods(){
-		foreach ($this->clauses as &$clause){
-			var_dump($clause);
+		foreach ($this->clauses as $clause){
 			$this->createAppendMethod($clause);
 		}
 	}
 
 	private function createAppendMethod($clause){
-		$funcClause = strtolower($clause->getClauseName()).'Clause';
-		$appendFunc = function ($string) use ($funcClause) {
-			$this->$funcClause->addToClause($string);
+		$clauseAttributeString = strtolower($clause->getClauseName()).'Clause';
+		$appendFunc = function ($string) use ($clauseAttributeString) {
+			$this->$clauseAttributeString->addToClause($string);
 			return $this;
 		};
 
-		$funcName = 'appendCustom'.ucwords(strtolower($clause->getClauseName()));
+		$funcName = 'appendTo'.ucwords(strtolower($clause->getClauseName()));
 
 		$this->generatedMethods[$funcName] = \Closure::bind($appendFunc, $this, get_class());
 	}
 
 	function __call($method, $args) {
-          if(is_callable($this->generatedMethods[$method]))
-          {
-            return call_user_func_array($this->generatedMethods[$method], $args);
-          }
-     }
+		if(is_callable($this->generatedMethods[$method])){
+			return call_user_func_array($this->generatedMethods[$method], $args);
+		}
+	}
 }

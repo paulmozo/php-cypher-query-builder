@@ -31,7 +31,7 @@ class ClientTest extends TestCase{
 		->match('Person', 'person')
 		->match('LIKES')
 		->match('Movie', 'movie')
-		->appendCustomMatch(' Here Is My Custom Cypher');
+		->appendToMatch(' Here Is My Custom Cypher');
 
 		$this->assertEquals('MATCH (person:Person)-[:LIKES]-(movie:Movie) Here Is My Custom Cypher', (string)$client);
 	}
@@ -41,10 +41,28 @@ class ClientTest extends TestCase{
 
 		$client
 		->match('Person', 'person')
-		->appendCustomMatch(' Custom match Cypher')
-		->appendCustomWhere('Custom where Cypher')
-		->appendCustomReturn('Custom return Cypher');
+		->appendToMatch(' Custom match Cypher')
+		->appendToWhere('Custom where Cypher')
+		->appendToReturn('Custom return Cypher');
 
 		$this->assertEquals('MATCH (person:Person) Custom match Cypher WHERE Custom where Cypher RETURN Custom return Cypher', (string)$client);
+	}
+
+	public function testResetClient(){
+		$client = new Moozla\QueryBuilder\Client();
+
+		$client
+		->match('Person', 'person')
+		->match('LIKES')
+		->match('Movie', 'movie')
+		->where('movie', 'name', "=", 'Taxi Driver')
+		->return('movie');
+
+		$client->reset();
+
+		$client
+		->match('Actor', 'a');
+
+		$this->assertEquals('MATCH (a:Actor)', (string)$client);
 	}
 }
