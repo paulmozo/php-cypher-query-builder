@@ -36,9 +36,9 @@ This project makes walking a graph easy. One of the main benefits is that it aut
 * More exceptions when invalid Cypher is detected
 * Make this project available via packagist
 
-#Examples
+# Examples
 
-##Match Node-relation-Node and return all 3
+## Match Node-relation-Node and return all 3
 
 ```
 $client = new Moozla\QueryBuilder\Client();
@@ -58,7 +58,7 @@ Will output the string:
 
 `MATCH (person:Person)-[likes:LIKES]-(movie:Movie) RETURN person, likes, movie`
 
-##Match Node then add custom CYPHER to all clauses
+## Match Node then add custom CYPHER to all clauses
 
 ```
 $client = new Moozla\QueryBuilder\Client();
