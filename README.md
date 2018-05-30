@@ -8,14 +8,16 @@ A PHP library for generating Cypher queries to be used with Graph databases such
 # Making cypher queries easily using the query builder
 
 ```
-$client = new QueryBuilder\Client();
+$client = new Moozla\QueryBuilder\Client();
 
-echo $client
+$client
   ->match('Person', 'person')
   ->match('LIKES')
   ->match('Movie', 'movie')
   ->where('movie', 'name', "=", 'Taxi Driver')
   ->return('movie');
+
+echo (string)$client;
 ```
 
 Will output the string:
@@ -30,5 +32,47 @@ This project makes walking a graph easy. One of the main benefits is that it aut
 # To do on this project
 * Support more operators for the where clause
 * Add more clauses such as "SET", "CREATE" and "DELETE"
+* Add Directional relationships support
 * More exceptions when invalid Cypher is detected
 * Make this project available via packagist
+
+#Examples
+
+##Match Node-relation-Node and return all 3
+
+```
+$client = new Moozla\QueryBuilder\Client();
+
+$client
+  ->match('Person', 'person')
+  ->match('LIKES', 'likes')
+  ->match('Movie', 'movie')
+  ->return('person')
+  ->return('likes')
+  ->return('movie');
+
+echo (string)$client;
+```
+
+Will output the string:
+
+`MATCH (person:Person)-[likes:LIKES]-(movie:Movie) RETURN person, likes, movie`
+
+##Match Node then add custom CYPHER to all clauses
+
+```
+$client = new Moozla\QueryBuilder\Client();
+
+$client
+  ->match('Person', 'person')
+  ->appendToMatch('-[]->(:CustomMatch)')
+  ->appendToWhere('(person)-[:KNOWS]-({name: 'Jeff'})')
+  ->appendToReturn('count(person)');
+
+echo (string)$client;
+```
+Will output the string:
+
+`MATCH (person:Person)-[]->(:CustomMatch) WHERE (person)-[:KNOWS]-({name: 'Jeff'}) RETURN count(person)`
+
+Note: All of the 'appendTo' methods will simply append the given string to the specified clause allowing for CYPHER not directly supported through the other query builder methods
