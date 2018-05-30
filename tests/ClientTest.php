@@ -65,4 +65,17 @@ class ClientTest extends TestCase{
 
 		$this->assertEquals('MATCH (a:Actor)', (string)$client);
 	}
+
+	public function testMultipleReturns(){
+		$client = new Moozla\QueryBuilder\Client();
+
+		$client
+		->match('Person', 'person')
+		->match('LIKES')
+		->match('Movie', 'movie')
+		->return('movie')
+		->return('person');
+
+		$this->assertEquals('MATCH (person:Person)-[:LIKES]-(movie:Movie) RETURN movie, person', (string)$client);
+	}
 }
