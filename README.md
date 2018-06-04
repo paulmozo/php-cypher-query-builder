@@ -38,6 +38,8 @@ This project makes walking a graph easy. One of the main benefits is that it aut
 
 # Examples
 
+For a full list of examples look at the client tests found in `tests/ClientTests/`
+
 ## Match Node-relation-Node and return all 3
 
 ```

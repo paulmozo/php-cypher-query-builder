@@ -30,6 +30,16 @@ class Client{
 		return $this;
 	}
 
+	public function rightMatch($label, $variable = ''){
+		$this->matchClause->rightMatch($label, $variable);
+		return $this;
+	}
+
+	public function leftMatch($label, $variable = ''){
+		$this->matchClause->leftMatch($label, $variable);
+		return $this;
+	}
+
 	public function where($variable, $attribute, $operator, $value, $or = false){
 		$this->whereClause->where($variable, $attribute, $operator, $value, $or = false);
 		return $this;
