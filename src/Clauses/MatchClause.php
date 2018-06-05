@@ -51,4 +51,10 @@ class MatchClause extends Clause{
 		}
 		return $this->clause;
 	}
+
+	public function end(){
+		$this->addToClause(' ');
+		$this->initialised = false;
+		$this->relationShipMatch = false;
+	}
 }
