@@ -76,6 +76,11 @@ class Client{
 
 	}
 
+	public function endMatch(){
+		$this->matchClause->end();
+		return $this;
+	}
+
 	/**
 	 * Creates a custom append method for each clause at run time
 	 */
