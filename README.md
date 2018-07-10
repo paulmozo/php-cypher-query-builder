@@ -31,10 +31,10 @@ This project makes walking a graph easy. One of the main benefits is that it aut
 
 # To do on this project
 * Support more operators for the where clause
-* Add more clauses such as "SET", "CREATE" and "DELETE"
-* Add Directional relationships support
+* ~Add more clauses such as "SET", "CREATE" and "DELETE"~
+* ~Add Directional relationships support~
 * More exceptions when invalid Cypher is detected
-* Make this project available via packagist
+* ~Make this project available via packagist~
 
 # Examples
 
