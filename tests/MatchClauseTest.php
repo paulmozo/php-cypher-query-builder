@@ -59,4 +59,11 @@ class MatchClauseTest extends TestCase{
 		$clause->rightMatch('Person');
 	}
 
+	public function testMultiMatch(){
+		$clause = new MatchClause();
+		$clause->match('Person', 'person');
+		$clause->end();
+		$clause->match('Movie', 'movie');
+		$this->assertEquals('MATCH (person:Person) MATCH (movie:Movie)', $clause->getClause());
+	}
 }

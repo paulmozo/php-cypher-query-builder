@@ -46,8 +46,10 @@ class MatchClause extends Clause{
 	}
 
 	public function getClause(){
-		if (!$this->relationShipMatch){
-			throw new MatchEndingWithRelationshipException('Match clauses cannot end with a relationship match. ');
+		if (!empty($this->clause)){
+			if (!$this->relationShipMatch){
+				throw new MatchEndingWithRelationshipException('Match clauses cannot end with a relationship match. ');
+			}
 		}
 		return $this->clause;
 	}

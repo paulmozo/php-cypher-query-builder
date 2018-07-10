@@ -78,4 +78,49 @@ class ClientTest extends TestCase{
 
 		$this->assertEquals('MATCH (person:Person)-[:LIKES]-(movie:Movie) RETURN movie, person', (string)$client);
 	}
+
+	public function testSet(){
+		$client = new Moozla\QueryBuilder\Client();
+
+		$client
+		->match('Person', 'person')
+		->match('LIKES')
+		->match('Movie', 'movie')
+		->set('person', 'age', 29);
+
+		$this->assertEquals('MATCH (person:Person)-[:LIKES]-(movie:Movie) SET person.age = 29', (string)$client);
+	}
+
+	public function testSetArray(){
+		$client = new Moozla\QueryBuilder\Client();
+
+		$client
+		->match('Person', 'person')
+		->match('LIKES')
+		->match('Movie', 'movie')
+		->setArray('person', ['name' => 'Jeff', 'age' => 47]);
+
+		$this->assertEquals('MATCH (person:Person)-[:LIKES]-(movie:Movie) SET person.name = "Jeff", person.age = 47', (string)$client);
+	}
+
+	public function testCreate(){
+		$client = new Moozla\QueryBuilder\Client();
+
+		$client->create('person', 'Person', ['name' => 'Jeff', 'age' => 47]);
+
+		$this->assertEquals('CREATE (person:Person { name: "Jeff", age: 47 })', (string)$client);
+	}
+
+	public function testDelete(){
+		$client = new Moozla\QueryBuilder\Client();
+
+		$client
+		->match('Person', 'person')
+		->match('LIKES')
+		->match('Movie', 'movie')
+		->delete('movie')
+		->delete('person');
+
+		$this->assertEquals('MATCH (person:Person)-[:LIKES]-(movie:Movie) DELETE movie, person', (string)$client);
+	}
 }
