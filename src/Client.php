@@ -3,6 +3,9 @@
 use Moozla\QueryBuilder\Clauses\MatchClause;
 use Moozla\QueryBuilder\Clauses\WhereClause;
 use Moozla\QueryBuilder\Clauses\ReturnClause;
+use Moozla\QueryBuilder\Clauses\SetClause;
+use Moozla\QueryBuilder\Clauses\CreateClause;
+use Moozla\QueryBuilder\Clauses\DeleteClause;
 
 /**
 *  Query Builder Client
@@ -50,6 +53,26 @@ class Client{
 		return $this;
 	}
 
+	public function set($variable, $attribute, $value){
+		$this->setClause->set($variable, $attribute, $value);
+		return $this;
+	}
+
+	public function setArray($variable, $setArray){
+		$this->setClause->setArray($variable, $setArray);
+		return $this;
+	}
+
+	public function create($label, $variable, $properties = []){
+		$this->createClause->create($label, $variable, $properties);
+		return $this;
+	}
+
+	public function delete($variable){
+		$this->deleteClause->delete($variable);
+		return $this;
+	}
+
 	public function __toString(){
 		$clauseStrings = [];
 
@@ -65,11 +88,17 @@ class Client{
 		$this->matchClause = new MatchClause;
 		$this->whereClause = new WhereClause;
 		$this->returnClause = new ReturnClause;
+		$this->setClause = new SetClause;
+		$this->createClause = new CreateClause;
+		$this->deleteClause = new DeleteClause;
 
 		$this->clauses = [
 			$this->matchClause,
 			$this->whereClause,
-			$this->returnClause
+			$this->returnClause,
+			$this->setClause,
+			$this->createClause,
+			$this->deleteClause
 		];
 
 		$this->createCustomAppendMethods();
