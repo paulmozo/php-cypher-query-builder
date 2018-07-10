@@ -9,7 +9,7 @@
             "email": "paulmozo@gmail.com"
         }
     ],
-    "type": "project",
+    "type": "package",
     "require": {
 		"php": ">=7.0"
     },
