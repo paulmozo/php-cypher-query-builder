@@ -2,7 +2,6 @@
 A PHP library for generating Cypher queries to be used with Graph databases such as Neo4J
 
 ## NOTES
-* Not currently available through packagist
 * This is a work in progress and there is still a lot to be done
 
 # Making cypher queries easily using the query builder
