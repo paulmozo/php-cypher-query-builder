@@ -77,3 +77,25 @@ Will output the string:
 `MATCH (person:Person)-[]->(:CustomMatch) WHERE (person)-[:KNOWS]-({name: 'Jeff'}) RETURN count(person)`
 
 Note: All of the 'appendTo' methods will simply append the given string to the specified clause allowing for CYPHER not directly supported through the other query builder methods
+
+## Multi Match
+
+Sometimes with Cypher you need to match multiple parts of the graph before joining them. The query builder supports this
+
+```
+		$client = new Moozla\QueryBuilder\Client();
+		$client
+			->match('Person', 'person')
+			->endMatch()
+			->match('Movie', 'movie')
+			->match('DIRECTED_BY')
+			->match('Director', 'director')
+			->where('director', 'name', '=', 'Ms Director')
+			->return('movie')
+			->return('person');
+      
+    echo (string)$client;
+```
+
+Will output the following:
+```MATCH (person:Person) MATCH (movie:Movie)-[:DIRECTED_BY]-(director:Director) WHERE director.name = "Ms Director" RETURN movie, person```
